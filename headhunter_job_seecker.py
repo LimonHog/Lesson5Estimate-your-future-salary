@@ -32,10 +32,11 @@ def get_hh_statistic(languages):
             if page >= response['pages']-1:
                 break
             salaries = []
-            for item in response['items']:
-                if item['salary'] and item['salary']['currency'] == 'RUR':
+            
+            for one_job in response['items']:
+                if one_job['salary'] and one_job['salary']['currency'] == 'RUR':
                     counter += 1
-                    salaries.append(int(predict_rub_salary(item['salary'])))    
+                    salaries.append(int(predict_rub_salary(one_job['salary'])))    
             average_salary = sum(salaries)/counter
             average_salary = int(average_salary)   
 
