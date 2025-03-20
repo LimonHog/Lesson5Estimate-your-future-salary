@@ -37,13 +37,14 @@ def get_sj_statistic(languages):
             sj_response = sj_response.json()
 
             salaries = []
-            for one_object in sj_response['objects']:
-                if one_object['currency'] == 'rub': 
-                    if one_object['payment_from'] or one_object['payment_to']:
+            
+            for one_job_lure in sj_response['objects']:
+                if one_job_lure['currency'] == 'rub': 
+                    if one_job_lure['payment_from'] or one_job_lure['payment_to']:
                         counter += 1
                         
-                        sj_salary = predict_rub_salary_for_superJob(one_object['payment_from'], one_object['payment_to'])  
-                        salaries.append(int(predict_rub_salary_for_superJob(one_object['payment_from'], one_object['payment_to']))) 
+                        sj_salary = predict_rub_salary_for_superJob(one_job_lure['payment_from'], one_job_lure['payment_to'])  
+                        salaries.append(int(predict_rub_salary_for_superJob(one_job_lure['payment_from'], one_job_lure['payment_to']))) 
 
             try:
                 average_salary = sum(salaries)/counter   
