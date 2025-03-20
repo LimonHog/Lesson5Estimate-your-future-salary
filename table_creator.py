@@ -1,5 +1,4 @@
 from terminaltables import AsciiTable
-from pprint import pprint
 from headhunter_job_seecker import get_hh_statistic
 from superjob_job_seecker import get_sj_statistic
 
