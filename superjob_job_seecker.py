@@ -2,15 +2,9 @@ import requests
 from itertools import count
 from dotenv import load_dotenv
 import os
+from salary_perdicter import predict_rub_salary
 
 
-def predict_rub_salary_for_superJob(payment_from, payment_to):
-    if payment_to and payment_from:
-        return (payment_from + payment_to)/2
-    if payment_from == 0 and payment_to != 0:
-        return payment_to*0.8
-    if payment_to == 0 and payment_from != 0:
-        return payment_from*1.2
 
 
 def get_sj_statistic(languages):
@@ -43,8 +37,8 @@ def get_sj_statistic(languages):
                     if one_job_lure['payment_from'] or one_job_lure['payment_to']:
                         counter += 1
                         
-                        sj_salary = predict_rub_salary_for_superJob(one_job_lure['payment_from'], one_job_lure['payment_to'])  
-                        salaries.append(int(predict_rub_salary_for_superJob(one_job_lure['payment_from'], one_job_lure['payment_to']))) 
+                        sj_salary = predict_rub_salary(one_job_lure['payment_from'], one_job_lure['payment_to'])  
+                        salaries.append(int(predict_rub_salary(one_job_lure['payment_from'], one_job_lure['payment_to']))) 
 
             try:
                 average_salary = sum(salaries)/counter   

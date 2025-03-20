@@ -1,14 +1,8 @@
 import requests
 from itertools import count
+from salary_perdicter import predict_rub_salary
 
-
-def predict_rub_salary(salary): 
-    if salary['from'] and salary['to']:
-        return (salary['from'] + salary['to'])/2
-    if salary['from'] is None:
-        return salary['to']*0.8
-    if salary['to'] is None:
-        return salary['from']*1.2
+    
 
 def get_hh_statistic(languages):
 
@@ -36,7 +30,7 @@ def get_hh_statistic(languages):
             for one_job in response['items']:
                 if one_job['salary'] and one_job['salary']['currency'] == 'RUR':
                     counter += 1
-                    salaries.append(int(predict_rub_salary(one_job['salary'])))    
+                    salaries.append(int(predict_rub_salary(one_job['salary']['from'], one_job['salary']['to'])))    
             average_salary = sum(salaries)/counter
             average_salary = int(average_salary)   
 
