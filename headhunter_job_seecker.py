@@ -5,9 +5,9 @@ from itertools import count
 def predict_rub_salary(salary): 
     if salary['from'] and salary['to']:
         return (salary['from'] + salary['to'])/2
-    if salary['from'] == None:
+    if salary['from'] is None:
         return salary['to']*0.8
-    if salary['to'] == None:
+    if salary['to'] is None:
         return salary['from']*1.2
 
 def get_hh_statistic(languages):
