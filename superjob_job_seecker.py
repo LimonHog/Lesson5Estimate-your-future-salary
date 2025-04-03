@@ -1,6 +1,5 @@
 import requests
 from itertools import count
-from dotenv import load_dotenv
 import os
 from salary_perdicter import predict_rub_salary
 
@@ -8,7 +7,6 @@ from salary_perdicter import predict_rub_salary
 
 
 def get_sj_statistic(languages):
-    load_dotenv()
     vacancies_statistic = {}
     for language in languages:
         counter = 0

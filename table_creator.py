@@ -1,6 +1,7 @@
 from terminaltables import AsciiTable
 from headhunter_job_seecker import get_hh_statistic
 from superjob_job_seecker import get_sj_statistic
+from dotenv import load_dotenv
 
 
 def make_table(vacancies_statistic, languages, title):
@@ -18,6 +19,8 @@ def make_table(vacancies_statistic, languages, title):
 
 
 def main():
+    load_dotenv() 
+
     languages = ['Python', 'Java', 'JavaScript', 'C++', 'C#', 'Ruby', 'C']
 
     sj_vacancies_statistic = get_sj_statistic(languages)
