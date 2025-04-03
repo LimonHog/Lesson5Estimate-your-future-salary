@@ -37,17 +37,16 @@ def get_sj_statistic(languages, api):
                      
                     salaries.append(int(predict_rub_salary(one_job_lure['payment_from'], one_job_lure['payment_to'])))
 
-            try:
-                average_salary = sum(salaries)/counter   
-            except ZeroDivisionError:
-                average_salary = 0    
-
-            vacancies_statistic[language] = {
-                "vacancies_found": sj_response['total'],
-                "vacancies_processed": counter,
-                "average_salary": average_salary
-            }
-
             if not sj_response['more']:
                 break
+        try:
+            average_salary = sum(salaries)/counter   
+        except ZeroDivisionError:
+            average_salary = 0    
+
+        vacancies_statistic[language] = {
+            "vacancies_found": sj_response['total'],
+            "vacancies_processed": counter,
+            "average_salary": average_salary
+        }      
     return vacancies_statistic
