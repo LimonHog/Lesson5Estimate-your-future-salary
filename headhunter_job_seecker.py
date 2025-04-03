@@ -5,7 +5,8 @@ from salary_perdicter import predict_rub_salary
     
 
 def get_hh_statistic(languages):
-
+    region_id = '1'
+    per_page = 100
     hh_vacancies_statistic = {}
     for language in languages:
         counter = 0
@@ -14,9 +15,9 @@ def get_hh_statistic(languages):
             url = "https://api.hh.ru/vacancies"
             params= {
                 'text' : language,
-                'area' : '1',
+                'area' : region_id,
                 'page' : page,
-                'per_page': 100
+                'per_page': per_page
             }
             
             response = requests.get(url, params=params)
@@ -30,8 +31,13 @@ def get_hh_statistic(languages):
             for one_job in response['items']:
                 if one_job['salary'] and one_job['salary']['currency'] == 'RUR':
                     counter += 1
-                    salaries.append(int(predict_rub_salary(one_job['salary']['from'], one_job['salary']['to'])))    
-            average_salary = sum(salaries)/counter
+                    salaries.append(int(predict_rub_salary(one_job['salary']['from'], one_job['salary']['to'])))   
+            try:  
+                average_salary = sum(salaries)/counter
+            except ZeroDivisionError:
+                print("U can't didvide by zero")
+                average_salary = 0
+                
             average_salary = int(average_salary)   
 
         hh_vacancies_statistic[language] = {
