@@ -31,11 +31,12 @@ def get_sj_statistic(languages, api):
             
             for one_job_lure in sj_response['objects']:
                 if one_job_lure['currency'] == 'rub': 
-                    if one_job_lure['payment_from'] or one_job_lure['payment_to']:
-                        counter += 1
-                        
-                        sj_salary = predict_rub_salary(one_job_lure['payment_from'], one_job_lure['payment_to'])  
-                        salaries.append(int(predict_rub_salary(one_job_lure['payment_from'], one_job_lure['payment_to']))) 
+                    if not one_job_lure['payment_from'] or not one_job_lure['payment_to']:
+                        continue
+                    counter += 1
+                    
+                    sj_salary = predict_rub_salary(one_job_lure['payment_from'], one_job_lure['payment_to'])  
+                    salaries.append(int(predict_rub_salary(one_job_lure['payment_from'], one_job_lure['payment_to'])))
 
             try:
                 average_salary = sum(salaries)/counter   
