@@ -2,6 +2,7 @@ from terminaltables import AsciiTable
 from headhunter_job_seecker import get_hh_statistic
 from superjob_job_seecker import get_sj_statistic
 from dotenv import load_dotenv
+import os
 
 
 def make_table(vacancies_statistic, languages, title):
@@ -22,8 +23,9 @@ def main():
     load_dotenv() 
 
     languages = ['Python', 'Java', 'JavaScript', 'C++', 'C#', 'Ruby', 'C']
+    super_job_api = os.environ['API_SUPERJOB']
 
-    sj_vacancies_statistic = get_sj_statistic(languages)
+    sj_vacancies_statistic = get_sj_statistic(languages, super_job_api)
     hh_vacancies_statistic = get_hh_statistic(languages)
 
     print(make_table(hh_vacancies_statistic, languages, title='HeadHunter'))

@@ -1,12 +1,11 @@
 import requests
 from itertools import count
-import os
 from salary_perdicter import predict_rub_salary
 
 
 
 
-def get_sj_statistic(languages):
+def get_sj_statistic(languages, api):
     vacancies_statistic = {}
     for language in languages:
         counter = 0
@@ -19,7 +18,7 @@ def get_sj_statistic(languages):
                 'count': 100
             }
             headers = {
-                'X-Api-App-Id': os.environ['API_SUPERJOB']
+                'X-Api-App-Id': api
             }
 
             superjob_url = f'https://api.superjob.ru/2.0/vacancies/'
