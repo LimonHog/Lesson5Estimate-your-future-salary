@@ -9,7 +9,7 @@ def get_hh_statistic(languages):
     per_page = 100
     hh_vacancies_statistic = {}
     for language in languages:
-        counter = 0
+        jobs_counter = 0
         for page in count(0, 1):
             
             url = "https://api.hh.ru/vacancies"
@@ -30,10 +30,10 @@ def get_hh_statistic(languages):
             
             for one_job in response['items']:
                 if one_job['salary'] and one_job['salary']['currency'] == 'RUR':
-                    counter += 1
+                    jobs_counter += 1
                     salaries.append(int(predict_rub_salary(one_job['salary']['from'], one_job['salary']['to'])))   
             try:  
-                average_salary = sum(salaries)/counter
+                average_salary = sum(salaries)/jobs_counter
             except ZeroDivisionError:
                 print("U can't didvide by zero")
                 average_salary = 0
@@ -42,7 +42,7 @@ def get_hh_statistic(languages):
 
         hh_vacancies_statistic[language] = {
             "vacancies_found": response['found'],
-            "vacancies_processed": counter,
+            "vacancies_processed": jobs_counter,
             "average_salary": average_salary
         }
     return hh_vacancies_statistic

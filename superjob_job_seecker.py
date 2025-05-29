@@ -8,7 +8,7 @@ from salary_perdicter import predict_rub_salary
 def get_sj_statistic(languages, secret_key):
     vacancies_statistic = {}
     for language in languages:
-        counter = 0
+        jobs_counter = 0
         for page in count(0, 1): 
             
             params = {
@@ -33,20 +33,20 @@ def get_sj_statistic(languages, secret_key):
                 if one_job_lure['currency'] == 'rub': 
                     if not one_job_lure['payment_from'] or not one_job_lure['payment_to']:
                         continue
-                    counter += 1
+                    job_counter += 1
                      
                     salaries.append(int(predict_rub_salary(one_job_lure['payment_from'], one_job_lure['payment_to'])))
 
             if not sj_response['more']:
                 break
         try:
-            average_salary = sum(salaries)/counter   
+            average_salary = sum(salaries)/job_counter   
         except ZeroDivisionError:
             average_salary = 0    
 
         vacancies_statistic[language] = {
             "vacancies_found": sj_response['total'],
-            "vacancies_processed": counter,
+            "vacancies_processed": job_counter,
             "average_salary": average_salary
         }      
     return vacancies_statistic
