@@ -11,8 +11,8 @@ def make_table(vacancies_statistic, languages, title):
         ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата'],
     ]
     
-    for language in languages:
-        js_vacancies_table.append([language, vacancies_statistic[language]['vacancies_found'], vacancies_statistic[language]['vacancies_processed'], vacancies_statistic[language]['average_salary']])
+    for language, statistic in vacancies_statistic.items():
+        js_vacancies_table.append([language, statistic['vacancies_found'], statistic['vacancies_processed'], statistic['average_salary']])
         
     sj_table = AsciiTable(js_vacancies_table)
     sj_table.title = f'{title} Moscow'
