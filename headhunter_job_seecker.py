@@ -35,7 +35,6 @@ def get_hh_statistic(languages):
             try:  
                 average_salary = sum(salaries)/jobs_counter
             except ZeroDivisionError:
-                print("U can't didvide by zero")
                 average_salary = 0
                 
             average_salary = int(average_salary)   
