@@ -5,7 +5,7 @@ from salary_perdicter import predict_rub_salary
 
 
 
-def get_sj_statistic(languages, api):
+def get_sj_statistic(languages, secret_key):
     vacancies_statistic = {}
     for language in languages:
         counter = 0
@@ -18,7 +18,7 @@ def get_sj_statistic(languages, api):
                 'count': 100
             }
             headers = {
-                'X-Api-App-Id': api
+                'X-Api-App-Id': secret_key
             }
 
             superjob_url = f'https://api.superjob.ru/2.0/vacancies/'

@@ -23,9 +23,9 @@ def main():
     load_dotenv() 
 
     languages = ['Python', 'Java', 'JavaScript', 'C++', 'C#', 'Ruby', 'C']
-    super_job_api = os.environ['API_SUPERJOB']
+    super_job_key = os.environ['API_SUPERJOB']
 
-    sj_vacancies_statistic = get_sj_statistic(languages, super_job_api)
+    sj_vacancies_statistic = get_sj_statistic(languages, super_job_key)
     hh_vacancies_statistic = get_hh_statistic(languages)
 
     print(make_table(hh_vacancies_statistic, languages, title='HeadHunter'))
